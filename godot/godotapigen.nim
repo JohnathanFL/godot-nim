@@ -341,6 +341,8 @@ proc makeDefaultValue(arg: MethodArg): PNode =
     elif arg.typ in arrayTypes and (arg.defaultVal.str == "[]" or
          arg.defaultVal.str == "[" & arg.typ & "]"):
       result = newCall("new" & arg.typ)
+    elif arg.typ == "Dictionary":
+      result = newCall("initGodotDictionary")
     elif arg.typ == "Vector2" or arg.typ == "Vector3" or arg.typ == "Rect2":
       let parts = arg.defaultVal.str.replace("(", "").replace(")", "").
                          replace(" ", "").
